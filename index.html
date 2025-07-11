@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tekko - Premium Streetwear T-Shirts</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ff3e3e;
+            --light: #f8f8f8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+        
+        .navbar {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .size-selector input:checked + label {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .cart-item:hover {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .animate-in {
+            animation: slideIn 0.3s ease-out forwards;
+        }
+        
+        /* Custom checkbox */
+        .custom-checkbox {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--primary);
+            border-radius: 3px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+        
+        .custom-checkbox:checked {
+            background-color: var(--primary);
+        }
+        
+        .custom-checkbox:checked::after {
+            content: "✓";
+            position: absolute;
+            color: white;
+            font-size: 14px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* Mobile menu transition */
+        .mobile-menu {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu.active {
+            max-height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-50 border-b border-gray-200">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <a href="#" class="text-2xl font-bold text-black">TEKKO</a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-black hover:text-red-500 transition">Home</a>
+                <a href="#products" class="text-black hover:text-red-500 transition">Shop</a>
+                <a href="#about" class="text-black hover:text-red-500 transition">About</a>
+                <a href="#contact" class="text-black hover:text-red-500 transition">Contact</a>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <button id="cart-toggle" class="relative">
+                    <i class="fas fa-shopping-bag text-xl text-black"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </button>
+                <button class="md:hidden" id="mobile-menu-toggle">
+                    <i class="fas fa-bars text-xl text-black"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden bg-white">
+            <div class="container mx-auto px-4 py-2 flex flex-col">
+                <a href="#" class="py-2 border-b border-gray-100">Home</a>
+                <a href="#products" class="py-2 border-b border-gray-100">Shop</a>
+                <a href="#about" class="py-2 border-b border-gray-100">About</a>
+                <a href="#contact" class="py-2 border-b border-gray-100">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero relative text-white py-32 md:py-48 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 animate-in">UNLEASH YOUR STREET STYLE</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto animate-in" style="animation-delay: 0.2s;">Premium quality streetwear that speaks volumes</p>
+            <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full transition transform hover:scale-105 animate-in" style="animation-delay: 0.4s;">
+                SHOP NOW
+                <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+        </div>
+    </section>
+    
+    <!-- Featured Collection -->
+    <section id="products" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">OUR COLLECTIONS</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://placehold.co/600x600" alt="Black Tekko signature logo t-shirt with distressed vintage look" class="w-full h-80 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <button class="bg-white text-black py-2 px-4 rounded-full font-medium w-full flex items-center justify-center">
+                                Quick View
+                            </button>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-red-500 text-white text-xs px-2 py-1 rounded">BESTSELLER</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Signature Logo Tee</h3>
+                        <p class="text-gray-600 mb-2">Black / Distressed Edition</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold">$29.99</span>
+                            <button class="add-to-cart bg-black text-white p-2 rounded-full hover:bg-red-500 transition" data-id="1" data-name="Signature Logo Tee" data-price="29.99" data-image="https://placehold.co/600x600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://placehold.co/600x600" alt="White retro Tekko script t-shirt with vintage washed cotton fabric" class="w-full h-80 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <button class="bg-white text-black py-2 px-4 rounded-full font-medium w-full flex items-center justify-center">
+                                Quick View
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Retro Script Tee</h3>
+                        <p class="text-gray-600 mb-2">White / Vintage Wash</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold">$24.99</span>
+                            <button class="add-to-cart bg-black text-white p-2 rounded-full hover:bg-red-500 transition" data-id="2" data-name="Retro Script Tee" data-price="24.99" data-image="https://placehold.co/600x600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://placehold.co/600x600" alt="Gray oversized Tekko graphic t-shirt with street art print" class="w-full h-80 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <button class="bg-white text-black py-2 px-4 rounded-full font-medium w-full flex items-center justify-center">
+                                Quick View
+                            </button>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-yellow-500 text-black text-xs px-2 py-1 rounded">NEW</span>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Graphic Statement Tee</h3>
+                        <p class="text-gray-600 mb-2">Gray / Oversized Fit</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold">$34.99</span>
+                            <button class="add-to-cart bg-black text-white p-2 rounded-full hover:bg-red-500 transition" data-id="3" data-name="Graphic Statement Tee" data-price="34.99" data-image="https://placehold.co/600x600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://placehold.co/600x600" alt="Red Tekko crewneck t-shirt with minimal embroidery detail" class="w-full h-80 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <button class="bg-white text-black py-2 px-4 rounded-full font-medium w-full flex items-center justify-center">
+                                Quick View
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Minimal Crewneck</h3>
+                        <p class="text-gray-600 mb-2">Red / Embroidered</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold">$27.99</span>
+                            <button class="add-to-cart bg-black text-white p-2 rounded-full hover:bg-red-500 transition" data-id="4" data-name="Minimal Crewneck" data-price="27.99" data-image="https://placehold.co/600x600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://placehold.co/600x600" alt="Black long sleeve Tekko t-shirt with metallic foil print" class="w-full h-80 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <button class="bg-white text-black py-2 px-4 rounded-full font-medium w-full flex items-center justify-center">
+                                Quick View
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Long Sleeve Foil Tee</h3>
+                        <p class="text-gray-600 mb-2">Black / Metallic Print</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold">$36.99</span>
+                            <button class="add-to-cart bg-black text-white p-2 rounded-full hover:bg-red-500 transition" data-id="5" data-name="Long Sleeve Foil Tee" data-price="36.99" data-image="https://placehold.co/600x600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-md transition duration-300">
+                    <div class="relative overflow-hidden group">
+                        <img src="https://placehold.co/600x600" alt="Cream distressed Tekko t-shirt with Japanese kanji print" class="w-full h-80 object-cover"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
+                            <button class="bg-white text-black py-2 px-4 rounded-full font-medium w-full flex items-center justify-center">
+                                Quick View
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold">Japanese Kanji Tee</h3>
+                        <p class="text-gray-600 mb-2">Cream / Distressed</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold">$32.99</span>
+                            <button class="add-to-cart bg-black text-white p-2 rounded-full hover:bg-red-500 transition" data-id="6" data-name="Japanese Kanji Tee" data-price="32.99" data-image="https://placehold.co/600x600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-black text-black font-bold py-2 px-6 hover:bg-black hover:text-white transition rounded-full">
+                    VIEW ALL COLLECTIONS
+                </button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://placehold.co/800x1000" alt="Tekko design studio with designers working on new t-shirt concepts" class="rounded-lg shadow-lg w-full"/>
+                </div>
+                <div class="md:w-1/2">
+                    <h2 class="text-3xl font-bold mb-6">OUR STORY</h2>
+                    <p class="text-lg mb-4">
+                        Founded in 2020, Tekko emerged from Tokyo's vibrant street fashion scene with a mission to fuse traditional Japanese craftsmanship with contemporary urban aesthetics.
+                    </p>
+                    <p class="text-lg mb-6">
+                        Every piece in our collection is designed for comfort, durability, and bold self-expression. We meticulously source sustainable fabrics and partner with ethical manufacturers who share our commitment to quality.
+                    </p>
+                    <div class="mb-8">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center mr-4">
+                                <i class="fas fa-tshirt text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Premium Materials</h3>
+                                <p class="text-gray-600">100% organic cotton & recycled fabrics</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center mr-4">
+                                <i class="fas fa-globe text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Global Inspiration</h3>
+                                <p class="text-gray-600">Designs influenced by Tokyo to New York</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center mr-4">
+                                <i class="fas fa-heart text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Made with Passion</h3>
+                                <p class="text-gray-600">Each piece tells a unique story</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="bg-black text-white py-3 px-6 rounded-full hover:bg-red-500 transition">
+                        READ OUR FULL STORY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-12 text-center">What Our Customers Say</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/80x80" alt="Portrait of Sarah J. wearing Tekko signature logo t-shirt" class="w-12 h-12 rounded-full mr-4"/>
+                        <div>
+                            
